@@ -28,8 +28,6 @@ app.get('/get-mobimatter-data/:orderId', async(req, res) => {
 
     const { orderId } = req.params;
 
-    console.log(orderId);
-
     try {
 
         let config = {
@@ -45,15 +43,13 @@ app.get('/get-mobimatter-data/:orderId', async(req, res) => {
 
         const fetchedData = await axios(config);
 
-        console.log(fetchedData);
-
         if(!fetchedData.data || fetchedData.status !== 200) return res.status(fetchedData.status).send('Error fetching data');
 
-        res.status(200).json(fetchedData.data);
+        res.status(200).send(fetchedData.data);
         
     } catch(err) {
         console.log(err.message);
-        return res.status();
+        return res.status(500).send('Error occured');
     }
 
 });
