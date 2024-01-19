@@ -1,0 +1,20 @@
+{
+  "name": "page_fetch_backend",
+  "version": "1.0.0",
+  "description": "Backend for fetching data from mobimatter",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^1.6.5",
+    "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
+    "express": "^4.18.2",
+    "express-rate-limit": "^7.1.5",
+    "helmet": "^7.1.0",
+    "toobusy-js": "^0.5.1"
+  }
+}
