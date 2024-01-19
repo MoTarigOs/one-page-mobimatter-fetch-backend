@@ -9,7 +9,7 @@ const rateLimitMiddleware = require('./middleware/RateLimiter');
 
 const PORT = process.env.PORT;
 
-app.use(cors({ origin: ['https://65aa97b431951f0b176f7dc9--boisterous-croissant-645f55.netlify.app/'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(express.urlencoded( { extended: false })); 
 app.use(express.json());
 app.use(helmet());
@@ -23,6 +23,8 @@ app.use(function (req, res, next) {
 app.use(rateLimitMiddleware);
 
 app.get('/get-mobimatter-data/:orderId', async(req, res) => {
+
+
 
     if(!req?.params) return res.status(400).send('Please enter orderId');
 
