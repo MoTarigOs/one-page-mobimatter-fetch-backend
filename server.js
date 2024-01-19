@@ -1,3 +1,10 @@
+/* 
+  Here is the Server
+  To run the server: node server.js
+  Before running the server, make sure your frontend domain assign to environment variable FRONTEND_DOMAIN
+*/
+
+
 const { default: axios } = require('axios');
 const express = require('express');
 const app = express();
@@ -7,9 +14,16 @@ const helmet = require('helmet');
 const tooBusy = require('toobusy-js');
 const rateLimitMiddleware = require('./middleware/RateLimiter');
 
+
+// the Port that server running on, you can change it with the env variables
 const PORT = process.env.PORT;
 
+
+// Allow only this domain or domains to access the website
 app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+
+
+// Some of express adjustment, optimization & security
 app.use(express.urlencoded( { extended: false })); 
 app.use(express.json());
 app.use(helmet());
@@ -22,9 +36,9 @@ app.use(function (req, res, next) {
 });
 app.use(rateLimitMiddleware);
 
+
+// Handle the GET api request here
 app.get('/get-mobimatter-data/:orderId', async(req, res) => {
-
-
 
     if(!req?.params) return res.status(400).send('Please enter orderId');
 
@@ -56,6 +70,8 @@ app.get('/get-mobimatter-data/:orderId', async(req, res) => {
 
 });
 
+
+// Running the server
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}`);
 });
