@@ -4,7 +4,7 @@ const app = express();
 require('dotenv').config();
 const cors = require('cors');
 const helmet = require('helmet');
-const tooBusy =- require('toobusy-js');
+const tooBusy = require('toobusy-js');
 const rateLimitMiddleware = require('./middleware/RateLimiter');
 
 const PORT = process.env.PORT;
