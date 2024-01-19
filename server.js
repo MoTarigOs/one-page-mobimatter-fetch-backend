@@ -9,7 +9,7 @@ const rateLimitMiddleware = require('./middleware/RateLimiter');
 
 const PORT = process.env.PORT;
 
-app.use(cors({ origin: ['http://127.0.0.1:5500'], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 app.use(express.urlencoded( { extended: false })); 
 app.use(express.json());
 app.use(helmet());
