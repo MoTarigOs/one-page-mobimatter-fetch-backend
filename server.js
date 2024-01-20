@@ -5,7 +5,7 @@
 */
 
 
-const { default: axios } = require('axios');
+const axios = require('axios');
 const express = require('express');
 const app = express();
 require('dotenv').config();
@@ -24,7 +24,7 @@ app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowed
 
 
 // Some of express adjustment, optimization & security
-app.use(express.urlencoded( { extended: false })); 
+app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
 app.use(helmet());
 app.use(function (req, res, next) {
@@ -40,7 +40,7 @@ app.use(rateLimitMiddleware);
 // Handle the GET api request here
 app.get('/get-mobimatter-data/:orderId', async(req, res) => {
 
-    if(!req?.params) return res.status(400).send('Please enter orderId');
+    if(!req || !req.params) return res.status(400).send('Please enter orderId');
 
     const { orderId } = req.params;
 
