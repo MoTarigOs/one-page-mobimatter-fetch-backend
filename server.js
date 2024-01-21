@@ -38,11 +38,11 @@ app.use(rateLimitMiddleware);
 
 
 // Handle the GET api request here
-app.get('/get-mobimatter-data/:orderId', async(req, res) => {
+app.get('/', async(req, res) => {
 
-    if(!req || !req.params) return res.status(400).send('Please enter orderId');
+    if(!req || !req.query) return res.status(400).send('Please enter orderId');
 
-    const { orderId } = req.params;
+    const { orderId } = req.query;
 
     try {
 
