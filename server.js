@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
 
 
 // Allow only this domain or domains to access the website
-app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['*'] }));
 
 
 // Some of express adjustment, optimization & security
