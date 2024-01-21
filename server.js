@@ -34,6 +34,7 @@ app.use(function (req, res, next) {
         next();
     }
 });
+app.set('trust proxy', 1);
 app.use(rateLimitMiddleware);
 
 
@@ -73,6 +74,7 @@ app.get('/', async(req, res) => {
 
 // Running the server
 app.listen(PORT, () => {
-    console.log(`Server is running on port: ${PORT}, MOBIMATTER_BASE_URL: ${process.env.MOBIMATTER_BASE_URL}
-    , FRONTEND_DOMAIN: ${process.env.FRONTEND_DOMAIN}`);
+    console.log(`Server is running on port: ${PORT}
+    MOBIMATTER_BASE_URL: ${process.env.MOBIMATTER_BASE_URL}
+    FRONTEND_DOMAIN: ${process.env.FRONTEND_DOMAIN}`);
 });
