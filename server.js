@@ -20,7 +20,7 @@ const PORT = process.env.PORT;
 
 
 // Allow only this domain or domains to access the website
-app.use(cors({ origin: [process.env.FRONTEND_DOMAIN, process.env.FRONTEND_DOMAIN_WITH_WWW], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 
 
 // Some of express adjustment, optimization & security
@@ -76,6 +76,5 @@ app.get('/', async(req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running on port: ${PORT}
     MOBIMATTER_BASE_URL: ${process.env.MOBIMATTER_BASE_URL}
-    FRONTEND_DOMAIN1: ${process.env.FRONTEND_DOMAIN}
-    FRONTEND_DOMAIN2: ${process.env.FRONTEND_DOMAIN_WITH_WWW}`);
+    FRONTEND_DOMAIN: ${process.env.FRONTEND_DOMAIN}`);
 });
