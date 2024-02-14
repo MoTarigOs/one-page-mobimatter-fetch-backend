@@ -6,7 +6,7 @@
 const setRateLimit = require("express-rate-limit");
 
 
-const requests = 60;
+const requests = 120000;
 const time = 60 * 1000;
 const messageShowedTiUser = "You send too many requests, please try again after few minuts";
 
