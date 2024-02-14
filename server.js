@@ -29,7 +29,9 @@ app.use(express.json());
 app.use(helmet());
 app.use(function (req, res, next) {
     if(tooBusy()){
-        console.log("The server is too busy");
+        return res.status(503).send("The server is too busy, please try again after a moment");
+    } else {
+        next();
     }
 });
 app.set('trust proxy', 1);
