@@ -27,13 +27,11 @@ app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowed
 app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
 app.use(helmet());
-// app.use(function (req, res, next) {
-//     if(tooBusy()){
-//         return res.status(503).send("The server is too busy, please try again after a moment");
-//     } else {
-//         next();
-//     }
-// });
+app.use(function (req, res, next) {
+    if(tooBusy()){
+        console.log("The server is too busy");
+    }
+});
 app.set('trust proxy', 1);
 app.use(rateLimitMiddleware);
 
