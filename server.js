@@ -20,13 +20,14 @@ const PORT = process.env.PORT;
 
 
 // Allow only this domain or domains to access the website
-app.use(cors({ origin: [process.env.FRONTEND_DOMAIN], credentials: true, allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
+app.use(cors({ origin: process.env.FRONTEND_DOMAIN, methods: 'GET', allowedHeaders: ['Content-Type', 'Authorization', 'authorization'] }));
 
 
 // Some of express adjustment, optimization & security
 app.use(express.urlencoded({ extended: false })); 
 app.use(express.json());
 app.use(helmet());
+app.set('trust proxy', 1);
 app.use(function (req, res, next) {
     if(tooBusy()){
         return res.status(503).send("The server is too busy, please try again after a moment");
@@ -34,14 +35,13 @@ app.use(function (req, res, next) {
         next();
     }
 });
-app.set('trust proxy', 1);
 app.use(rateLimitMiddleware);
 
 
 // Handle the GET api request here
 app.get('/', async(req, res) => {
 
-    if(!req || !req.query) return res.status(400).send('Please enter orderId');
+    if(!req || !req.query || !req.query.orderId) return res.status(400).send('Please enter orderId');
 
     const { orderId } = req.query;
 
@@ -60,7 +60,7 @@ app.get('/', async(req, res) => {
 
         const fetchedData = await axios(config);
 
-        if(!fetchedData.data || fetchedData.status !== 200) return res.status(fetchedData.status).send('Error fetching data');
+        if(!fetchedData?.data || fetchedData.status !== 200) return res.status(404).send('Error fetching data');
 
         res.status(200).send(fetchedData.data);
         
